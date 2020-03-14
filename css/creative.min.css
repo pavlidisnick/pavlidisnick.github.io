@@ -29,7 +29,7 @@ body {
 }
 
 hr {
-    border-color: #ff1616;
+    border-color: #c23050;
     border-width: 3px;
     max-width: 50px
 }
@@ -40,11 +40,11 @@ hr.light {
 
 a {
     transition: all .35s;
-    color: #ff1616
+    color: #c23050
 }
 
 a:focus, a:hover {
-    color: #ff1616
+    color: #c23050
 }
 
 p {
@@ -54,7 +54,7 @@ p {
 }
 
 .bg-primary {
-    background-color: #ff1616
+    background-color: #c23050
 }
 
 .bg-dark {
@@ -96,7 +96,7 @@ aside {
 }
 
 .navbar-default .navbar-header .navbar-brand:focus, .navbar-default .navbar-header .navbar-brand:hover {
-    color: #ff1616
+    color: #c23050
 }
 
 .navbar-default .navbar-header .navbar-toggle {
@@ -114,11 +114,11 @@ aside {
 }
 
 .navbar-default .nav > li > a:focus:hover, .navbar-default .nav > li > a:hover {
-    color: #ff1616
+    color: #c23050
 }
 
 .navbar-default .nav > li.active > a, .navbar-default .nav > li.active > a:focus {
-    color: #ff1616 !important;
+    color: #c23050 !important;
     background-color: transparent
 }
 
@@ -154,12 +154,12 @@ aside {
     }
 
     .navbar-default.affix .navbar-header .navbar-brand {
-        color: #ff1616;
+        color: #c23050;
         font-size: 14px
     }
 
     .navbar-default.affix .navbar-header .navbar-brand:focus, .navbar-default.affix .navbar-header .navbar-brand:hover {
-        color: #ff1616
+        color: #c23050
     }
 
     .navbar-default.affix .nav > li > a, .navbar-default.affix .nav > li > a:focus {
@@ -167,7 +167,7 @@ aside {
     }
 
     .navbar-default.affix .nav > li > a:focus:hover, .navbar-default.affix .nav > li > a:hover {
-        color: #ff1616
+        color: #c23050
     }
 }
 
@@ -244,6 +244,7 @@ header .header-content .header-content-inner p {
 .service-box {
     max-width: 400px;
     margin: 50px auto 0
+    color: #c23050;
 }
 
 @media (min-width: 992px) {
@@ -267,7 +268,7 @@ header .header-content .header-content-inner p {
     color: #fff;
     opacity: 0;
     display: block;
-    background: #ff1616;
+    background: #c23050;
     position: absolute;
     bottom: 0;
     text-align: center;
@@ -326,7 +327,7 @@ header .header-content .header-content-inner p {
 }
 
 .text-primary {
-    color: #ff1616
+    color: #c23050
 }
 
 .no-gutter > [class*=col-] {
@@ -359,8 +360,8 @@ header .header-content .header-content-inner p {
 
 .btn-primary {
     color: #fff;
-    background-color: #ff1616;
-    border-color: #ff1616;
+    background-color: #c23050;
+    border-color: #c23050;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s
@@ -368,17 +369,17 @@ header .header-content .header-content-inner p {
 
 .btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
     color: #fff;
-    background-color: #ff1616;
-    border-color: #ff1616
+    background-color: #c23050;
+    border-color: #c23050
 }
 
 .btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled].active, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
-    background-color: #ff1616;
-    border-color: #ff1616
+    background-color: #c23050;
+    border-color: #c23050
 }
 
 .btn-primary .badge {
-    color: #ff1616;
+    color: #c23050;
     background-color: #fff
 }
 
