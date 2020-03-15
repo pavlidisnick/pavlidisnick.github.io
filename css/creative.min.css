@@ -415,3 +415,12 @@ img::-moz-selection {
     color: #fff;
     background: 0 0
 }
+
+.container .row {
+    margin-bottom: 20px;
+}
+
+.portfolio-list {
+    text-align: left;
+    padding-left: 280px;
+}
