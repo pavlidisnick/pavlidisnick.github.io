@@ -420,7 +420,17 @@ img::-moz-selection {
     margin-bottom: 20px;
 }
 
-.portfolio-list {
+.custom1 {
     text-align: left;
-    padding-left: 280px;
+    padding-left: 260px;
+}
+
+.custom2 {
+    text-align: left;
+    padding-left: 200px;
+}
+
+.custom3 {
+    text-align: left;
+    padding-left: 225px;
 }
