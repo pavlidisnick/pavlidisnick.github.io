@@ -27,6 +27,7 @@
     "@hapi/cryptiles": "^5.0.0",
     "@hapi/hoek": "^9.0.3",
     "clean-css": "^4.1.11",
-    "lodash.template": "^4.5.0"
+    "lodash.template": "^4.5.0",
+    "minimist": "^1.2.5"
   }
 }
