@@ -1,14 +1,135 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width'>
-    <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nick Pavlidis · .NET Backend Engineer</title>
+<meta name="description" content="Nick Pavlidis, .NET backend engineer building real-time betting systems in C#: slot engines, sportsbook pipelines and low-latency B2B APIs.">
+<meta name="theme-color" content="#0b0c0e">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pavlidisnick.github.io/">
+<meta property="og:title" content="Nick Pavlidis · .NET Backend Engineer">
+<meta property="og:description" content="Real-time C# systems for betting platforms: slot engines, sportsbook pipelines and B2B APIs.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0b0c0e; --panel: #111217; --line: #22252c; --text: #d8d9da; --muted: #8e8e98; --green: #73bf69; --amber: #ffb000; --blue: #5794f2;
+          --l1: #f2495c; --l2: #3b9cff; --l3: #2fd27a; --l4: #ffc233; --l5: #b877d9; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--text); font: 14.5px/1.55 "Hanken Grotesk", system-ui, sans-serif; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+  header { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  .roundel { width: 34px; height: 34px; border-radius: 50%; border: 6px solid var(--l1); position: relative; flex: none; }
+  .roundel::after { content: ""; position: absolute; left: -10px; right: -10px; top: 50%; height: 8px; transform: translateY(-50%); background: var(--l2); }
+  .crumb { font-size: 15px; } .crumb span { color: var(--muted); }
+  .ctrl { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  .ctrl a, .ctrl span { border: 1px solid var(--line); background: #181b1f; color: var(--text); padding: 5px 10px; border-radius: 4px; font-size: 13px; text-decoration: none; }
+  .ctrl a.pri { background: var(--amber); border-color: var(--amber); color: #111; font-weight: 700; }
+  .live { color: var(--green); } .live::before { content: "●"; margin-right: 5px; animation: p 1.6s infinite; } @keyframes p { 50% { opacity: .3; } }
+  main { padding: 12px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; max-width: 1400px; margin: 0 auto; }
+  .p { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 10px 14px 14px; min-width: 0; }
+  .p > h2 { font-size: 13px; font-weight: 500; margin-bottom: 10px; display: flex; justify-content: space-between; gap: 10px; }
+  .p > h2 i { color: var(--muted); font-style: normal; }
+  .s3 { grid-column: span 3; } .s4 { grid-column: span 4; } .s5 { grid-column: span 5; } .s7 { grid-column: span 7; } .s8 { grid-column: span 8; } .s12 { grid-column: span 12; }
+  .who h1 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+  .who .role { color: var(--amber); font-weight: 700; margin: 4px 0 10px; }
+  .who p { color: var(--muted); font-size: 15px; }
+  .who code { font-family: "JetBrains Mono", monospace; font-size: 12px; background: #1c1f26; padding: 2px 7px; border-radius: 4px; margin: 8px 4px 0 0; display: inline-block; }
+  .stat { font-size: clamp(24px, 3vw, 34px); font-weight: 800; line-height: 1.1; }
+  .stat small { font-size: 13px; color: var(--muted); font-weight: 400; }
+  /* departure board */
+  .board { background: #050505; border-radius: 4px; padding: 6px 10px; font-family: "JetBrains Mono", monospace; overflow-x: auto; }
+  .board table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; color: var(--amber); }
+  .board th { text-align: left; color: #777; font-weight: 500; font-size: 11px; letter-spacing: .12em; padding: 6px 8px; border-bottom: 1px solid #262626; }
+  .board td { padding: 8px; border-bottom: 1px dashed #1f1f1f; white-space: nowrap; }
+  .board .ln { display: inline-block; width: 26px; text-align: center; color: #fff; font-weight: 700; border-radius: 3px; }
+  .board .st { color: #7CFC00; } .board .st.b { animation: bl 1.2s steps(1) infinite; } @keyframes bl { 50% { opacity: .2; } }
+  .board .d { color: #9a9a9a; font-size: 12px; white-space: normal; }
+  /* map */
+  .mapwrap { overflow-x: auto; }
+  .mapwrap svg { width: 100%; min-width: 680px; height: auto; display: block; }
+  .mapwrap text { fill: var(--text); font-family: "Hanken Grotesk", sans-serif; }
+  .mapwrap .ic { fill: var(--panel); stroke: var(--text); stroke-width: 4; }
+  .mapwrap .lbl { font-weight: 700; font-size: 14.5px; } .mapwrap .sub { font-size: 11.5px; fill: var(--muted); }
+  .you { animation: pulse 1.8s ease-out infinite; transform-origin: center; transform-box: fill-box; }
+  @keyframes pulse { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
+  @media (prefers-reduced-motion: reduce) { .you, .live::before, .board .st.b { animation: none; } }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: var(--muted); }
+  .legend span { display: flex; align-items: center; gap: 5px; } .legend i { width: 18px; height: 5px; border-radius: 3px; }
+  .logs { font-family: "JetBrains Mono", monospace; font-size: 12.5px; line-height: 1.8; }
+  .logs .t { color: var(--muted); } .logs .i { color: var(--green); } .logs .w { color: var(--amber); }
+  .logs a, .p a.lnk { color: var(--blue); }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 14px; }
+  .kv span:nth-child(odd) { color: var(--muted); }
+  @media (max-width: 900px) { .s3 { grid-column: span 6; } .s4, .s5, .s7, .s8 { grid-column: span 12; } }
+  @media (max-width: 520px) { .s3 { grid-column: span 12; } .ctrl { margin-left: 0; } }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 3px; }
+</style>
 </head>
-
 <body>
+<header>
+  <div class="roundel"></div>
+  <div class="crumb"><span>Control room /</span> nick-pavlidis <span>/</span> career-line</div>
+  <div class="ctrl"><span class="live">Live</span><a class="pri" href="/nick-pavlidis-cv.pdf" download>⬇ Download CV</a><a href="https://github.com/pavlidisnick" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/pavlidisnick95/" target="_blank" rel="noopener">LinkedIn</a><a class="js-mail" href="https://www.linkedin.com/in/pavlidisnick95/" data-u="pavlidis.nik95" data-d="gmail.com">Email</a></div>
+</header>
+<main>
+  <div class="p s5 who"><h2>Operator <i>README</i></h2>
+    <h1>Nick Pavlidis</h1>
+    <div class="role">.NET Backend Engineer</div>
+    <p>I build the real-time C# systems behind betting platforms: slot engines, sportsbook feed pipelines and low-latency B2B operator APIs.</p>
+    <div><code>C#</code><code>.NET</code><code>PostgreSQL</code><code>SQL Server</code><code>Redis</code><code>Docker</code><code>Jenkins</code></div>
+  </div>
+  <div class="p s7"><h2>Departures board <i>career lines</i></h2>
+    <div class="board"><table>
+      <tr><th>LINE</th><th>DESTINATION</th><th>OPERATOR</th><th>TIME</th><th>STATUS</th></tr>
+      <tr><td><span class="ln" style="background:var(--l1)">S</span></td><td>Slots Engine<div class="d">math models, RNG rules, spin state</div></td><td>BetAdvanced</td><td>2025 →</td><td class="st b">IN SERVICE</td></tr>
+      <tr><td><span class="ln" style="background:var(--l2)">B</span></td><td>Sportsbook &amp; Core<div class="d">feeds, settlement, B2B APIs</div></td><td>BetAdvanced</td><td>2023–25</td><td class="st">ARRIVED</td></tr>
+      <tr><td><span class="ln" style="background:var(--l3)">P</span></td><td>Public Sector Apps<div class="d">.NET Core, Angular, React</div></td><td>European Dyn.</td><td>2022</td><td class="st">ARRIVED</td></tr>
+      <tr><td><span class="ln" style="background:var(--l5)">W</span></td><td>Web &amp; E-commerce<div class="d">OpenCart, WordPress</div></td><td>TechPlace</td><td>2020–21</td><td class="st">ARRIVED</td></tr>
+    </table></div>
+  </div>
 
+  <div class="p s3"><h2>Network status</h2><div class="stat live" style="font-size:24px">Running</div></div>
+  <div class="p s3"><h2>Current line</h2><div class="stat" style="color:var(--l1)">Slots <small>BetAdvanced</small></div></div>
+  <div class="p s3"><h2>Stations served</h2><div class="stat">4 <small>roles since 2020</small></div></div>
+  <div class="p s3"><h2>Branch lines</h2><div class="stat" style="color:var(--l4)">1 <small>CountCash</small></div></div>
+
+  <div class="p s12"><h2>Network map <span class="legend"><span><i style="background:var(--l5)"></i>Web</span><span><i style="background:var(--l3)"></i>Public</span><span><i style="background:var(--l2)"></i>Sportsbook</span><span><i style="background:var(--l1)"></i>Slots</span><span><i style="background:var(--l4)"></i>Side</span></span></h2>
+    <div class="mapwrap"><svg viewBox="0 0 1000 270" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-label="Career route map">
+      <path d="M60 200 H240" stroke="var(--l5)" stroke-width="11"/>
+      <path d="M240 200 H330 L395 135 H460" stroke="var(--l3)" stroke-width="11"/>
+      <path d="M460 135 H560 L615 80 H700" stroke="var(--l2)" stroke-width="11"/>
+      <path d="M700 80 H900" stroke="var(--l1)" stroke-width="11"/>
+      <path d="M560 135 V215 H700" stroke="var(--l4)" stroke-width="11" stroke-dasharray="2 17"/>
+      <circle class="ic" cx="60" cy="200" r="11"/><text class="lbl" x="60" y="238" text-anchor="middle">B.Eng.</text><text class="sub" x="60" y="254" text-anchor="middle">Engineering Informatics</text>
+      <circle class="ic" cx="240" cy="200" r="14"/><text class="lbl" x="240" y="238" text-anchor="middle">TechPlace</text><text class="sub" x="240" y="254" text-anchor="middle">2020 – 21</text>
+      <circle class="ic" cx="460" cy="135" r="14"/><text class="lbl" x="460" y="105" text-anchor="middle">European Dynamics</text><text class="sub" x="460" y="89" text-anchor="middle">2022</text>
+      <circle class="ic" cx="700" cy="80" r="14"/><text class="lbl" x="700" y="46" text-anchor="middle">Sportsbook</text><text class="sub" x="700" y="29" text-anchor="middle">BetAdvanced 2023 – 25</text>
+      <circle class="ic" cx="700" cy="215" r="11"/><text class="lbl" x="722" y="220">CountCash</text><text class="sub" x="722" y="236">Android · Kotlin</text>
+      <circle cx="900" cy="80" r="14" fill="var(--l1)" class="you"/><circle class="ic" cx="900" cy="80" r="14" style="stroke:var(--l1)"/><circle cx="900" cy="80" r="5" fill="var(--l1)"/>
+      <text class="lbl" x="900" y="46" text-anchor="middle">Slots</text><text class="sub" x="900" y="29" text-anchor="middle">you are here · 2025 →</text>
+    </svg></div></div>
+
+  <div class="p s5"><h2>Branch line: CountCash</h2>
+    <p style="margin-bottom:8px">Offline-first cash-counting app for Android, built natively in Kotlin.</p>
+    <a class="lnk" href="/count-cash-privacy-policy.html">Privacy policy</a></div>
+  <div class="p s3"><h2>Passenger info</h2>
+    <div class="kv"><span>Degree</span><span>B.Eng. Informatics</span><span>Greek</span><span>native</span><span>English</span><span>C2</span><span>German</span><span>B1</span></div></div>
+  <div class="p s4"><h2>Service log <i>tail -f</i></h2>
+    <div class="logs">
+      <div><span class="t">2025-05</span> <span class="i">INFO</span> line S opened (Slots)</div>
+      <div><span class="t">2023-01</span> <span class="i">INFO</span> line B opened (Sportsbook)</div>
+      <div><span class="t">2022-01</span> <span class="i">INFO</span> line P opened</div>
+      <div><span class="t">2020-06</span> <span class="i">INFO</span> line W opened</div>
+      <div><span class="t">-------</span> <span class="w">NEXT</span> your team? → <a class="js-mail" href="https://www.linkedin.com/in/pavlidisnick95/" data-u="pavlidis.nik95" data-d="gmail.com">email</a></div>
+    </div></div>
+</main>
+<script>
+  // Build mailto links at runtime so the address is not in the HTML source.
+  document.querySelectorAll('.js-mail').forEach(a => { a.href = 'mailto:' + a.dataset.u + '@' + a.dataset.d; });
+</script>
 </body>
-
 </html>
