@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 108 108">
+  <!-- Diadromi's launcher icon (res/drawable/ic_launcher_foreground.xml on the launcher green), full bleed for Play and profile pictures. -->
+  <rect width="108" height="108" fill="#2F6B4F"/>
+  <g transform="translate(27 27) scale(2.25)">
+    <path d="M8,18h7a3,3 0,0 0,0 -6H9a3,3 0,0 1,0 -6h7" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M4,18a2,2 0,1 0,4 0a2,2 0,1 0,-4 0M16,6a2,2 0,1 0,4 0a2,2 0,1 0,-4 0" fill="#FFFFFF"/>
+  </g>
+</svg>
